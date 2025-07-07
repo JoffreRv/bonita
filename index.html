@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Bonita</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #000;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #osito {
+      position: absolute;
+      bottom: 20px;
+      left: -150px;
+      width: 120px;
+      animation: caminar 4s forwards;
+    }
+
+    @keyframes caminar {
+      to {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    #corazon {
+      position: absolute;
+      bottom: 180px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+      padding: 15px 25px;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: aparecer 1s ease-out 4s forwards;
+      cursor: pointer;
+    }
+
+    #corazon span {
+      color: #d60000;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .emoji {
+      font-size: 1.5rem;
+    }
+
+    @keyframes aparecer {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .frase {
+      position: absolute;
+      background: white;
+      border-radius: 10px;
+      padding: 10px 20px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      color: #333;
+      font-weight: bold;
+      opacity: 1;
+      animation: aparecerFrase 0.5s ease-out;
+    }
+
+    @keyframes aparecerFrase {
+      from {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="pngtree-bear-cartoon-png-image_13229418.png" alt="Osito" id="osito">
+    <div id="corazon">
+      <span class="emoji">❤️</span>
+      <span> ==> Mi Bonita <== </span>
+      <span class="emoji">❤️</span>
+    </div>
+  </div>
+
+  <script>
+    const corazon = document.getElementById('corazon');
+    const container = document.querySelector('.container');
+
+    const frases = [
+      'Me encanta su forma de ser, es admirable',
+      'Puedo confiar siempre en ud',
+      'Su sonrisa, su voz, todo hace que mis dias sean bonitos',
+      'Es encantadora, no hay forma de aburrirme con ud',
+      'Es bonita',
+      'Es graciosa',
+      'Gracias por existir con tanta ternura',
+      'Es un rayito de sol en días grises',
+      'Es amable',
+      'Mi bonita, es ud especial de verdad'
+    ];
+
+    let fraseIndex = 0;
+
+    corazon.addEventListener('click', () => {
+      if (fraseIndex >= frases.length) {
+        // Eliminar todas las frases actuales
+        document.querySelectorAll('.frase').forEach(el => el.remove());
+        // Reiniciar el índice para volver a mostrar frases
+        fraseIndex = 0;
+        return;
+      }
+
+      const div = document.createElement('div');
+      div.className = 'frase';
+      div.textContent = frases[fraseIndex];
+
+      // Posición aleatoria
+      const x = Math.random() * (window.innerWidth - 200);
+      const y = Math.random() * (window.innerHeight - 100);
+      div.style.left = `${x}px`;
+      div.style.top = `${y}px`;
+
+      container.appendChild(div);
+
+      fraseIndex++;
+    });
+  </script>
+</body>
+</html>
